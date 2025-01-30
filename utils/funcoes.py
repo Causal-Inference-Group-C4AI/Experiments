@@ -42,7 +42,7 @@ def draw_graph(graph : nx.Graph, node_colors : list = None):
         arrowsize=20,                 # Arrow size for edges
     )
 
-def str_to_joaos(versao_str: str, custom_cardinalities: dict = None) -> str:
+def str_to_joaos(versao_str: str, latent: list[str], custom_cardinalities: dict = None) -> str:
     """
     Converts a string of edges like:
       "U1 -> X, U1 -> Y, U2 -> Z, X -> Y, Z -> X"
@@ -86,10 +86,10 @@ def str_to_joaos(versao_str: str, custom_cardinalities: dict = None) -> str:
         if node in custom_cardinalities:
             node_card[node] = custom_cardinalities[node]
         else:
-            node_card[node] = 0 if node.startswith("U") else 2
+            node_card[node] = 0 if node in latent else 2
 
-    u_nodes = [n for n in node_order if n.startswith("U")]
-    other_nodes = [n for n in node_order if not n.startswith("U")]
+    u_nodes = [n for n in node_order if n in latent]
+    other_nodes = [n for n in node_order if not n in latent]
     final_node_order = u_nodes + other_nodes
 
 
@@ -147,8 +147,8 @@ def generate_example(edges_str : str,  latent: list[str], intervention: list[str
     node_colors = define_colors(graph, latent, intervention, target)
     draw_graph(graph, node_colors)
 
-def get_joaos_input(edges_str: str, custom_cardinalities: dict = None):
-    print(str_to_joaos(edges_str, custom_cardinalities))
+def get_joaos_input(edges_str: str, latent: list[str], custom_cardinalities: dict = None):
+    print(str_to_joaos(edges_str, latent, custom_cardinalities))
 
 def tuple_generate_example(edges, custom_cardinalities: dict = None):
     """
