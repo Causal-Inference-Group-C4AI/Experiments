@@ -146,6 +146,8 @@ def generate_example(edges_str : str,  latent: list[str], intervention: list[str
 
     node_colors = define_colors(graph, latent, intervention, target)
     draw_graph(graph, node_colors)
+
+def get_joaos_input(edges_str: str, custom_cardinalities: dict = None):
     print(str_to_joaos(edges_str, custom_cardinalities))
 
 def tuple_generate_example(edges, custom_cardinalities: dict = None):
