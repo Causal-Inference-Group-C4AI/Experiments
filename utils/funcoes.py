@@ -147,8 +147,13 @@ def generate_example(edges_str : str,  latent: list[str], intervention: list[str
     node_colors = define_colors(graph, latent, intervention, target)
     draw_graph(graph, node_colors)
 
-def get_joaos_input(edges_str: str, latent: list[str], custom_cardinalities: dict = None):
-    print(str_to_joaos(edges_str, latent, custom_cardinalities))
+def get_joaos_input(edges_str: str, latent: list[str], file_path: str = "", custom_cardinalities: dict = None):
+    joaos_str = str_to_joaos(edges_str, latent, custom_cardinalities)
+    if (not file_path == ""):
+        f = open(file_path, "w")
+        f.write(joaos_str)
+    else:
+        print(joaos_str)
 
 def tuple_generate_example(edges, custom_cardinalities: dict = None):
     """
