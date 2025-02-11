@@ -25,7 +25,11 @@ class Experiment:
         self.doX0_groundtruth = doX0_groundtruth
         self.doX1_groundtruth = doX1_groundtruth
         self.u1_prob = str(u1_prob)
-        self.u2_prob = str(u2_prob)        
+        self.u2_prob = str(u2_prob)
+        
+        self.doX0_groundtruth = doX0_groundtruth
+        self.doX1_groundtruth = doX1_groundtruth
+
 
     def set_models(self, model_type: str, number_of_vars: int) -> None:
         self.doX0_models=MinMaxModels(model_type, number_of_vars)
